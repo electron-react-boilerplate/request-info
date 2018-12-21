@@ -12,6 +12,13 @@
 2. Add a `.github/config.yml` file that contains the following:
 
 ```yml
+# The comment the bot will make in the repo before
+# closing the issue
+requestInfoReplyComment: The maintainers of this repository require that you fill out the issue template correctly. # Default
+
+# Only close issues that have the label 'bug'
+requireBugLabel: true # Default
+
 # If any one of these titles is not included, the issue will automatically be closed
 requiredHeaders:
   - Prerequisites

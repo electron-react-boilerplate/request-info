@@ -3,30 +3,30 @@ const getConfig = require('probot-config');
 const defaultConfig = {
   requestInfoReplyComment:
     'The maintainers of this repository require that you fill out the issue template correctly.',
-  requestInfoOn: {
-    issue: true
-  },
   requiredHeaders: [
     'Prerequisites',
     'Expected Behavior',
     'Current Behavior',
     'Possible Solution',
     'Your Environment'
-  ]
+  ],
+  requireBugLabel: true
 };
 
 module.exports = app => {
   async function receive(context) {
-    const labels = await this.github.issues.listLabelsOnIssue();
-    if (!labels.includes('bug')) return;
-
-    const { title, body } = context.payload.issue;
-    const lowerCaseBody = body.toLowerCase();
+    const { data: labels } = await context.github.issues.listLabelsOnIssue(
+      context.issue()
+    );
+    if (!labels.find(label => label.name === 'bug')) return;
 
     try {
       const config = await getConfig(context, 'config.yml', defaultConfig);
 
       let invalid = false;
+
+      const { title, body } = context.payload.issue;
+      const lowerCaseBody = body.toLowerCase();
 
       if (!title || !body) {
         invalid = true;
@@ -41,10 +41,10 @@ module.exports = app => {
 
       if (invalid) {
         const { requestInfoReplyComment: closeComment } = config;
-        await this.github.issues.createComment({
-          body: closeComment
-        });
-        this.github.issues.edit({ state: 'closed' });
+        await context.github.issues.createComment(
+          context.issue({ body: closeComment })
+        );
+        await context.github.issues.edit(context.issue({ state: 'closed' }));
       }
     } catch (err) {
       if (err.code !== 404) {

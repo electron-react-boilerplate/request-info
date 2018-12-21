@@ -32,7 +32,8 @@
     "test:watch": "jest --watch --notify --notifyMode=change --coverage"
   },
   "dependencies": {
-    "probot": "^7.2.0"
+    "probot": "^7.2.0",
+    "probot-config": "^1.0.0"
   },
   "devDependencies": {
     "eslint": "^5.10.0",
@@ -48,7 +49,10 @@
   "eslintConfig": {
     "extends": [
       "bliss"
-    ]
+    ],
+    "rules": {
+      "no-restricted-syntax": "off"
+    }
   },
   "nodemonConfig": {
     "exec": "yarn start",

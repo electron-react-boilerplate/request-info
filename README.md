@@ -2,14 +2,33 @@
 
 > A GitHub App built with [Probot](https://github.com/probot/probot) that A GitHub App built with probot that automatically closes issues that do not follow the issue template of a GitHub project
 
-## Setup
+## Usage
+
+1. Install the bot on the intended repositories. The plugin requires the following **Permissions and Events**:
+- Pull requests: **Read & Write**
+  - [x] check the box for **Pull Request** events
+- Issues: **Read & Write**
+  - [x] check the box for **Issue** events
+2. Add a `.github/config.yml` file that contains the following:
+
+```yml
+# If any one of these titles is not included, the issue will automatically be closed
+requiredHeaders:
+  - Prerequisites
+  - Expected Behavior
+  - Current Behavior
+  - Possible Solution
+  - Your Environment
+```
+
+## Local Setup
 
 ```sh
 # Install dependencies
-npm install
+yarn
 
 # Run the bot
-npm start
+yarn start
 ```
 
 ## Contributing
@@ -20,4 +39,4 @@ For more, check out the [Contributing Guide](CONTRIBUTING.md).
 
 ## License
 
-[ISC](LICENSE) © 2018 Amila Welihinda <amilajack@gmail.com> (https://github.com/electron-react-boilerplate/require-bug-details)
+[MIT](LICENSE) © 2018-present Electron React Boilerplate

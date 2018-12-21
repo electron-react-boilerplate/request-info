@@ -1,0 +1,63 @@
+{
+  "name": "require-bug-details",
+  "version": "0.0.0",
+  "description": "A GitHub App built with probot that automatically closes issues that do not follow the issue template of a GitHub project",
+  "contributors": [
+    {
+      "name": "Vikram Rangaraj",
+      "email": "vikr01@icloud.com",
+      "url": "https://github.com/vikr01"
+    },
+    {
+      "name": "Amila Welihinda",
+      "email": "amilajack@gmail.com",
+      "url": "https://github.com/amilajack"
+    }
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/electron-react-boilerplate/require-bug-details.git",
+  "homepage": "https://github.com/electron-react-boilerplate/require-bug-details",
+  "bugs": "https://github.com/electron-react-boilerplate/require-bug-details/issues",
+  "keywords": [
+    "probot",
+    "github",
+    "probot-app",
+    "require-bug-details"
+  ],
+  "scripts": {
+    "dev": "nodemon",
+    "start": "probot run ./index.js",
+    "lint": "eslint .",
+    "test": "jest && yarn lint",
+    "test:watch": "jest --watch --notify --notifyMode=change --coverage"
+  },
+  "dependencies": {
+    "probot": "^7.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.10.0",
+    "eslint-config-bliss": "^3.1.2",
+    "jest": "^22.4.3",
+    "nock": "^10.0.0",
+    "nodemon": "^1.17.2",
+    "smee-client": "^1.0.2"
+  },
+  "engines": {
+    "node": ">= 8.3.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "bliss"
+    ]
+  },
+  "nodemonConfig": {
+    "exec": "yarn start",
+    "watch": [
+      ".env",
+      "."
+    ]
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
+}
